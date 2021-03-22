@@ -136,4 +136,52 @@ public class AppTest
         assertFalse(aux < 0);
         assertFalse(aux > 1);
     }
+
+    @Test
+    public void tc_12_addStudent(){
+        int aux = service.saveStudent(")", "Name1", 934);
+        assertEquals(1, aux);
+    }
+
+    @Test
+    public void tc_13_addStudent(){
+        int aux = service.saveStudent("33", "%", 934);
+        assertEquals(1, aux);
+    }
+
+    @Test
+    public void tc_14_addStudent(){
+        int aux = service.saveStudent("33", "Name1", 111);
+        assertEquals(1, aux);
+    }
+
+    @Test
+    public void tc_15_addStudent(){
+        int aux = service.saveStudent("33", "Name1", 937);
+        assertEquals(1, aux);
+    }
+
+    @Test
+    public void tc_16_addStudent(){
+        int aux = service.saveStudent("33", "Name1", 110);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_17_addStudent(){
+        int aux = service.saveStudent("33", "Name1", 109);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_18_addStudent(){
+        int aux = service.saveStudent("33", "Name1", 938);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_19_addStudent(){
+        int aux = service.saveStudent("33", "Name1", 939);
+        assertEquals(0, aux);
+    }
 }
