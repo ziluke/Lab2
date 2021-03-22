@@ -1,8 +1,5 @@
 package ssvv.lab2;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import domain.Nota;
 import domain.Student;
 import domain.Tema;
@@ -22,15 +19,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static org.junit.Assert.*;
+
 /**
  * Unit test for simple App.
  */
 public class AppTest 
 {
-    /**
-     * Rigorous Test :-)
-     */
-
     StudentXMLRepository fileRepository1;
     TemaXMLRepository fileRepository2;
     NotaXMLRepository fileRepository3;
@@ -65,21 +60,11 @@ public class AppTest
     }
 
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
-
-    @Test
     public void tc_1_addStudent(){
-
         int aux = service.saveStudent("33", "New Student 3", 934);
-
-
         assertEquals(1, aux);
 
         Student stud = fileRepository1.findOne("33");
-
         assertEquals("New Student 3", stud.getNume());
     }
 
@@ -88,5 +73,67 @@ public class AppTest
         Validator<Student> studentValidator = new StudentValidator();
         StudentRepository repository = new StudentRepository(studentValidator);
         repository.save(new Student("", "New Student 3", 934));
+    }
+
+    //Group
+    @Test(expected = ValidationException.class)
+    public void tc_3_addStudent(){
+        Validator<Student> studentValidator = new StudentValidator();
+        StudentRepository repository = new StudentRepository(studentValidator);
+        repository.save(new Student("33", "New Student 3", 939));
+    }
+
+    @Test(expected = ValidationException.class)
+    public void tc_4_addStudent(){
+        Validator<Student> studentValidator = new StudentValidator();
+        StudentRepository repository = new StudentRepository(studentValidator);
+        repository.save(new Student("33", "New Student 3", 109));
+    }
+
+    @Test
+    public void tc_5_addStudent(){
+        int aux = service.saveStudent("33", "New Student 3", 934);
+        assertEquals(1, aux);
+    }
+
+    ///Name
+    @Test
+    public void tc_6_addStudent(){
+        int aux = service.saveStudent("33", "", 934);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_7_addStudent(){
+        int aux = service.saveStudent("33", null, 934);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_8_addStudent(){
+        int aux = service.saveStudent("33", "Name1", 934);
+        assertEquals(1, aux);
+    }
+
+    @Test
+    public void tc_9_addStudent(){
+        int aux = service.saveStudent(null, "Name1", 924);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_10_addStudent(){
+        int aux = service.saveStudent("33", "Name1", 934);
+        assertEquals(1, aux);
+
+        aux = service.saveStudent("33", "Name2", 936);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_11_addStudent(){
+        int aux = service.saveStudent("33", "Name1", 934);
+        assertFalse(aux < 0);
+        assertFalse(aux > 1);
     }
 }
