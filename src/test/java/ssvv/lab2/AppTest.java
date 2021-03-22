@@ -42,11 +42,14 @@ public class AppTest
 
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
 
-        service.saveStudent("33", "New Student 3", 934);
+        int aux = service.saveStudent("33", "New Student 3", 934);
 
-        Student aux = fileRepository1.findOne("33");
 
-        assertEquals("New Student 3", aux.getNume());
+        assertEquals(1, aux);
+
+        Student stud = fileRepository1.findOne("33");
+
+        assertEquals("New Student 3", stud.getNume());
     }
 
     @Test
