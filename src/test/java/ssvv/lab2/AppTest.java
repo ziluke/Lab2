@@ -68,44 +68,35 @@ public class AppTest
         assertEquals("New Student 3", stud.getNume());
     }
 
-    @Test(expected = ValidationException.class)
+    @Test
     public void tc_2_addStudent(){
+        int aux = service.saveStudent(null, "Name1", 924);
+        assertEquals(0, aux);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void tc_3_addStudent(){
         Validator<Student> studentValidator = new StudentValidator();
         StudentRepository repository = new StudentRepository(studentValidator);
         repository.save(new Student("", "New Student 3", 934));
     }
 
     //Group
-    @Test(expected = ValidationException.class)
-    public void tc_3_addStudent(){
-        Validator<Student> studentValidator = new StudentValidator();
-        StudentRepository repository = new StudentRepository(studentValidator);
-        repository.save(new Student("33", "New Student 3", 939));
-    }
-
-    @Test(expected = ValidationException.class)
-    public void tc_4_addStudent(){
-        Validator<Student> studentValidator = new StudentValidator();
-        StudentRepository repository = new StudentRepository(studentValidator);
-        repository.save(new Student("33", "New Student 3", 109));
-    }
-
     @Test
-    public void tc_5_addStudent(){
+    public void tc_4_addStudent(){
         int aux = service.saveStudent("33", "New Student 3", 934);
         assertEquals(1, aux);
     }
 
-    ///Name
     @Test
     public void tc_6_addStudent(){
-        int aux = service.saveStudent("33", "", 934);
+        int aux = service.saveStudent("33", "Name1", 938);
         assertEquals(0, aux);
     }
 
     @Test
     public void tc_7_addStudent(){
-        int aux = service.saveStudent("33", null, 934);
+        int aux = service.saveStudent("33", "Name1", 110);
         assertEquals(0, aux);
     }
 
@@ -117,24 +108,20 @@ public class AppTest
 
     @Test
     public void tc_9_addStudent(){
-        int aux = service.saveStudent(null, "Name1", 924);
+        int aux = service.saveStudent("33", null, 934);
         assertEquals(0, aux);
     }
 
     @Test
     public void tc_10_addStudent(){
-        int aux = service.saveStudent("33", "Name1", 934);
-        assertEquals(1, aux);
-
-        aux = service.saveStudent("33", "Name2", 936);
+        int aux = service.saveStudent("33", "", 934);
         assertEquals(0, aux);
     }
 
     @Test
     public void tc_11_addStudent(){
-        int aux = service.saveStudent("33", "Name1", 934);
-        assertFalse(aux < 0);
-        assertFalse(aux > 1);
+        int aux = service.saveStudent("33", ")", 934);
+        assertEquals(1, aux);
     }
 
     @Test
@@ -145,10 +132,12 @@ public class AppTest
 
     @Test
     public void tc_13_addStudent(){
-        int aux = service.saveStudent("33", "%", 934);
+        int aux = service.saveStudent("33", "Name1", 934);
         assertEquals(1, aux);
-    }
 
+        aux = service.saveStudent("33", "Name2", 936);
+        assertEquals(0, aux);
+    }
     @Test
     public void tc_14_addStudent(){
         int aux = service.saveStudent("33", "Name1", 111);
@@ -163,25 +152,20 @@ public class AppTest
 
     @Test
     public void tc_16_addStudent(){
-        int aux = service.saveStudent("33", "Name1", 110);
-        assertEquals(0, aux);
-    }
-
-    @Test
-    public void tc_17_addStudent(){
         int aux = service.saveStudent("33", "Name1", 112);
         assertEquals(1, aux);
     }
 
     @Test
-    public void tc_18_addStudent(){
-        int aux = service.saveStudent("33", "Name1", 938);
-        assertEquals(0, aux);
+    public void tc_17_addStudent() {
+        int aux = service.saveStudent("33", "Name1", 936);
+        assertEquals(1, aux);
     }
 
     @Test
-    public void tc_19_addStudent(){
-        int aux = service.saveStudent("33", "Name1", 936);
-        assertEquals(1, aux);
+    public void tc_18_addStudent(){
+        int aux = service.saveStudent("33", "Name1", 934);
+        assertFalse(aux < 0);
+        assertFalse(aux > 1);
     }
 }
