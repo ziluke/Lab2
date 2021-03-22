@@ -169,8 +169,8 @@ public class AppTest
 
     @Test
     public void tc_17_addStudent(){
-        int aux = service.saveStudent("33", "Name1", 109);
-        assertEquals(0, aux);
+        int aux = service.saveStudent("33", "Name1", 112);
+        assertEquals(1, aux);
     }
 
     @Test
@@ -181,7 +181,7 @@ public class AppTest
 
     @Test
     public void tc_19_addStudent(){
-        int aux = service.saveStudent("33", "Name1", 939);
-        assertEquals(0, aux);
+        int aux = service.saveStudent("33", "Name1", 936);
+        assertEquals(1, aux);
     }
 }
