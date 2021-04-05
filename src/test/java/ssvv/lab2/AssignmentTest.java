@@ -70,8 +70,69 @@ public class AssignmentTest {
         assertEquals(1, ok);
     }
 
-    @Test(expected = ValidationException.class)
+    @Test
     public void tc_2_addAssignment(){
-        service.saveTema("1", "Desc", 0, 8);
+        int aux = service.saveTema("1", "Desc", 0, 8);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_3_addAssignment(){
+        int aux = service.saveTema("", "Desc", 4, 1);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_4_addAssignment(){
+        int aux = service.saveTema(null, "Desc", 4, 1);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_5_addAssignment(){
+        int aux = service.saveTema("1", "", 4, 1);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_6_addAssignment(){
+        int aux = service.saveTema("1", null, 4, 1);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_7_addAssignment(){
+        int aux = service.saveTema("1", "Desc", 15, 1);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_8_addAssignment(){
+        int aux = service.saveTema("1", "Desc", 2, 4);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_9_addAssignment(){
+        int aux = service.saveTema("1", "Desc", 15, 5);
+        assertEquals(0, aux);
+    }
+
+    @Test
+    public void tc_10_addAssignment(){
+        int aux = service.saveTema("1", "Desc", 5, 5);
+        assertEquals(1, aux);
+    }
+
+    @Test
+    public void tc_11_addAssignment(){
+        int aux = service.saveTema("1", "Desc", 14, 1);
+        assertEquals(1, aux);
+    }
+
+    @Test
+    public void tc_12_addAssignment(){
+        int aux = service.saveTema("1", "Desc", 1, 15);
+        assertEquals(0, aux);
     }
 }
